@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sell4you — Pipeline as a Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--w:#ffffff;--g50:#f7f7f7;--g100:#efefef;--g200:#e0e0e0;--g300:#c2c2c2;--g500:#888;--g600:#555;--g700:#333;--g800:#1a1a1a;--g900:#0d0d0d}
+body{font-family:'Barlow',sans-serif;background:var(--w);color:var(--g800);overflow-x:hidden}
+nav{background:var(--w);border-bottom:1px solid var(--g200);padding:0 6%;display:flex;align-items:center;justify-content:space-between;height:66px;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-box{width:36px;height:36px;background:var(--g900);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;font-style:italic}
+.logo-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:21px;color:var(--g900);letter-spacing:-.3px}
+.nav-menu{display:flex;gap:28px;list-style:none}
+.nav-menu a{text-decoration:none;color:var(--g600);font-size:14px;font-weight:500;transition:color .2s}
+.nav-menu a:hover{color:var(--g900)}
+.nav-btn{background:var(--g900);color:#fff;padding:10px 20px;border-radius:7px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.3px;transition:background .2s}
+.nav-btn:hover{background:var(--g700)}
+.hero{background:var(--g900);padding:100px 6% 90px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;right:-80px;width:500px;height:500px;border-radius:50%;border:1px solid rgba(255,255,255,.05)}
+.hero::after{content:'';position:absolute;bottom:-100px;right:100px;width:300px;height:300px;border-radius:50%;border:1px solid rgba(255,255,255,.04)}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center;position:relative}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:6px 14px;border-radius:4px;margin-bottom:24px}
+.hero-eyebrow span{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:52px;line-height:1;color:#fff;text-transform:uppercase;margin-bottom:22px}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:36px;max-width:460px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-dark-inv{background:#fff;color:var(--g900);padding:14px 26px;border-radius:7px;text-decoration:none;font-size:14px;font-weight:800;letter-spacing:.3px;transition:all .2s;border:2px solid #fff}
+.btn-dark-inv:hover{background:var(--g100);border-color:var(--g100)}
+.btn-ghost{background:transparent;color:rgba(255,255,255,.75);padding:14px 26px;border-radius:7px;text-decoration:none;font-size:14px;font-weight:700;transition:all .2s;border:2px solid rgba(255,255,255,.2)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.5);color:#fff}
+.hero-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:30px}
+.hc-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:20px}
+.hc-item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.hc-item:last-child{border-bottom:none}
+.hc-label{font-size:13px;color:rgba(255,255,255,.55);font-weight:500}
+.hc-val{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#fff}
+.hc-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.6)}
+.pain{padding:70px 6%;background:var(--g50);border-bottom:1px solid var(--g100)}
+.pain-inner{max-width:1100px;margin:0 auto}
+.pain-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+.pain-item{background:var(--w);border:1px solid var(--g200);border-radius:12px;padding:28px;border-left:3px solid var(--g800)}
+.pain-icon{font-size:22px;margin-bottom:12px}
+.pain-title{font-size:15px;font-weight:700;color:var(--g900);margin-bottom:8px}
+.pain-desc{font-size:13px;color:var(--g600);line-height:1.7}
+.stats{background:var(--g800);padding:50px 6%}
+.stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:center}
+.s-num{font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:900;color:#fff}
+.s-label{font-size:13px;color:rgba(255,255,255,.45);margin-top:4px;font-weight:500}
+.services{padding:80px 6%}
+.services-inner{max-width:1100px;margin:0 auto}
+.eyebrow{display:inline-block;background:var(--g100);color:var(--g700);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:4px;margin-bottom:14px}
+.sec-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:44px;text-transform:uppercase;color:var(--g900);line-height:1;margin-bottom:12px}
+.sec-sub{font-size:16px;color:var(--g600);line-height:1.7;max-width:540px;margin-bottom:48px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc-card{border:1px solid var(--g200);border-radius:14px;padding:32px;transition:all .2s;cursor:default}
+.svc-card:hover{border-color:var(--g800);transform:translateY(-2px)}
+.svc-num{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--g300);letter-spacing:2px;margin-bottom:16px}
+.svc-icon{width:44px;height:44px;background:var(--g100);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:20px}
+.svc-name{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;color:var(--g900);margin-bottom:10px}
+.svc-desc{font-size:13px;color:var(--g600);line-height:1.7}
+.svc-tag{display:inline-block;margin-top:16px;background:var(--g100);color:var(--g700);font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;letter-spacing:.5px}
+.method{background:var(--g900);padding:80px 6%}
+.method-inner{max-width:1100px;margin:0 auto}
+.method .eyebrow{background:rgba(255,255,255,.1);color:rgba(255,255,255,.5)}
+.method .sec-title{color:#fff}
+.method .sec-sub{color:rgba(255,255,255,.5)}
+.phases{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+.phase{border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:36px}
+.phase-header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.phase-badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:8px 14px;border-radius:7px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:rgba(255,255,255,.5);letter-spacing:1px;white-space:nowrap}
+.phase-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;text-transform:uppercase;color:#fff;line-height:1}
+.phase-steps{display:flex;flex-direction:column;gap:16px}
+.phase-step{display:flex;gap:14px;align-items:flex-start}
+.step-dot{width:8px;height:8px;background:rgba(255,255,255,.3);border-radius:50%;margin-top:6px;flex-shrink:0}
+.step-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px}
+.step-detail{font-size:13px;color:rgba(255,255,255,.45);line-height:1.6}
+.phase-highlight{background:rgba(255,255,255,.05);border-radius:10px;padding:16px;margin-top:20px}
+.ph-label{font-size:11px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.ph-val{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:#fff}
+.why{padding:80px 6%;background:var(--g50)}
+.why-inner{max-width:1100px;margin:0 auto}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+.why-card{background:var(--w);border:1px solid var(--g200);border-radius:14px;padding:32px}
+.why-num{font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:900;color:var(--g100);line-height:1;margin-bottom:16px}
+.why-title{font-size:16px;font-weight:700;color:var(--g900);margin-bottom:10px}
+.why-desc{font-size:13px;color:var(--g600);line-height:1.7}
+.price-highlight{margin-top:16px;display:flex;align-items:center;gap:8px}
+.price-tag{background:var(--g900);color:#fff;font-size:13px;font-weight:700;padding:6px 12px;border-radius:6px}
+.targets{padding:60px 6%;border-top:1px solid var(--g100);border-bottom:1px solid var(--g100)}
+.targets-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:60px}
+.targets-label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--g500);white-space:nowrap}
+.targets-list{display:flex;gap:14px;flex-wrap:wrap}
+.target-pill{background:var(--g100);color:var(--g700);font-size:13px;font-weight:600;padding:8px 18px;border-radius:24px;border:1px solid var(--g200)}
+.cta{padding:90px 6%;text-align:center}
+.cta-inner{max-width:680px;margin:0 auto}
+.cta h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:52px;text-transform:uppercase;color:var(--g900);line-height:1;margin-bottom:18px}
+.cta p{font-size:16px;color:var(--g600);line-height:1.7;margin-bottom:40px}
+.cta-box{background:var(--g900);border-radius:16px;padding:40px;text-align:left}
+.cta-box-title{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;color:#fff;text-transform:uppercase;margin-bottom:6px}
+.cta-box-sub{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:28px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.fg label{font-size:11px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.5px}
+.fg input,.fg select{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:'Barlow',sans-serif;outline:none;transition:border-color .2s}
+.fg input::placeholder{color:rgba(255,255,255,.25)}
+.fg input:focus,.fg select:focus{border-color:rgba(255,255,255,.4)}
+.fg select option{background:var(--g800);color:#fff}
+.form-submit{width:100%;background:#fff;color:var(--g900);border:none;padding:15px;border-radius:8px;font-size:15px;font-weight:800;cursor:pointer;font-family:'Barlow',sans-serif;transition:all .2s;letter-spacing:.5px;text-transform:uppercase;margin-top:4px}
+.form-submit:hover{background:var(--g100)}
+.form-note{font-size:12px;color:rgba(255,255,255,.3);text-align:center;margin-top:12px}
+footer{background:var(--g900);padding:50px 6% 30px}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;margin-bottom:40px}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.35);margin-top:10px;line-height:1.7;max-width:260px}
+.footer-slogan{font-size:13px;font-style:italic;color:rgba(255,255,255,.25);margin-top:8px}
+.footer-links{display:flex;gap:50px}
+.fl-col h4{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:14px}
+.fl-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.fl-col a{text-decoration:none;font-size:13px;color:rgba(255,255,255,.45);transition:color .2s}
+.fl-col a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.2)}
+@media(max-width:768px){
+.hero-inner,.phases,.svc-grid,.why-grid,.pain-grid{grid-template-columns:1fr}
+.stats-inner{grid-template-columns:1fr 1fr}
+.form-row{grid-template-columns:1fr}
+.nav-menu{display:none}
+.hero h1{font-size:36px}
+.targets-inner{flex-direction:column;gap:20px}
+.footer-top{flex-direction:column}
+.footer-links{flex-direction:column;gap:30px}
+.footer-bottom{flex-direction:column;gap:8px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-box">4</div>
+    <span class="logo-name">Sell4you</span>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#metodo">O Método</a></li>
+    <li><a href="#porque">Por que nós</a></li>
+    <li><a href="#diagnostico">Diagnóstico</a></li>
+  </ul>
+  <a href="https://duscaglia.github.io/sell4you/" target="_blank" class="nav-btn">Agendar Diagnóstico</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><span>Pipeline as a Service</span></div>
+      <h1>Tenha uma equipe comercial de elite, 100% personalizada e dedicada a abrir as portas que o seu negócio precisa.</h1>
+      <p class="hero-sub">Removemos todo o trabalho braçal da prospecção. Seu time recebe apenas SQLs — oportunidades qualificadas, prontas para fechar.</p>
+      <div class="hero-actions">
+        <a href="https://duscaglia.github.io/sell4you/" target="_blank" class="btn-dark-inv">Agendar Reunião de Diagnóstico</a>
+        <a href="#metodo" class="btn-ghost">Ver o Método →</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-title">Resultados da Operação</div>
+      <div class="hc-item"><span class="hc-label">Setup Estratégico</span><span class="hc-val">6–10 dias</span></div>
+      <div class="hc-item"><span class="hc-label">Fase de Tração</span><span class="hc-val">4 semanas</span></div>
+      <div class="hc-item"><span class="hc-label">Entrega</span><div style="text-align:right"><div class="hc-val" style="font-size:16px;line-height:1.2">SQLs na<br>sua agenda</div></div></div>
+      <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)">
+        <div class="hc-badge">Sem contratos longos · Sem burocracia</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pain">
+  <div class="pain-inner">
+    <div class="eyebrow">A dor do empresário</div>
+    <div class="sec-title">Você reconhece algum desses cenários?</div>
+    <div class="pain-grid">
+      <div class="pain-item">
+        <div class="pain-icon">🏢</div>
+        <div class="pain-title">Não possui um time comercial</div>
+        <div class="pain-desc">Sua empresa ainda não tem uma estrutura de vendas montada e precisa começar a prospectar sem contratar uma equipe interna.</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">⏱</div>
+        <div class="pain-title">Sem tempo para prospectar</div>
+        <div class="pain-desc">Sócios e vendedores gastam horas fazendo cold calls e enviando emails, sem resultados consistentes.</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">📉</div>
+        <div class="pain-title">Pipeline vazio ou irregular</div>
+        <div class="pain-desc">A receita depende de indicações e acasos. Não existe um processo previsível de geração de oportunidades.</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">🎯</div>
+        <div class="pain-title">Leads desqualificados</div>
+        <div class="pain-desc">O time de vendas perde tempo com prospects que não têm fit, orçamento ou autoridade de decisão.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div><div class="s-num">PMEs</div><div class="s-label">Startups e Consultorias</div></div>
+    <div><div class="s-num">6–10</div><div class="s-label">Dias de Setup Estratégico</div></div>
+    <div><div class="s-num">100%</div><div class="s-label">Foco em SQLs Qualificados</div></div>
+  </div>
+</div>
+
+<section id="servicos" class="services">
+  <div class="services-inner">
+    <div class="eyebrow">Nossos Serviços</div>
+    <div class="sec-title">Infraestrutura Comercial Completa</div>
+    <p class="sec-sub">Cobrimos todas as etapas do funil de vendas, do zero até a reunião qualificada na sua agenda. O fechamento fica com você.</p>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-num">01</div>
+        <div class="svc-icon">🎯</div>
+        <div class="svc-name">Estruturação de ICP</div>
+        <div class="svc-desc">Definição precisa do Perfil de Cliente Ideal antes de qualquer ação. Sem ICP claro, nenhuma prospecção funciona.</div>
+        <div class="svc-tag">Inteligência Comercial</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">02</div>
+        <div class="svc-icon">⛏️</div>
+        <div class="svc-name">List Building</div>
+        <div class="svc-desc">Mineração de dados e criação de listas de leads exclusivas e altamente qualificadas para sua operação.</div>
+        <div class="svc-tag">Mineração de Dados</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">03</div>
+        <div class="svc-icon">📡</div>
+        <div class="svc-name">Prospecção Multicanal</div>
+        <div class="svc-desc">Abordagem via Outbound Calling, Outbound Emailing e Social Selling. Presença onde o seu prospect está.</div>
+        <div class="svc-tag">Outbound Ativo</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">04</div>
+        <div class="svc-icon">🔍</div>
+        <div class="svc-name">Qualificação SDR/BDR</div>
+        <div class="svc-desc">Filtro rigoroso com especialistas que falam a língua do seu setor. Apenas SQLs chegam ao seu time de fechamento.</div>
+        <div class="svc-tag">Venda Consultiva</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">05</div>
+        <div class="svc-icon">📅</div>
+        <div class="svc-name">Agendamento de Reuniões</div>
+        <div class="svc-desc">Reuniões qualificadas entregues diretamente na agenda do seu time. Você abre o calendário e encontra oportunidades reais.</div>
+        <div class="svc-tag">Entrega na Agenda</div>
+      </div>
+      <div class="svc-card" style="border:1px solid var(--g800);background:var(--g50)">
+        <div class="svc-num">+</div>
+        <div class="svc-icon">📊</div>
+        <div class="svc-name">Guia de Objeções</div>
+        <div class="svc-desc">Entregamos um guia completo de objeções do seu mercado para que seu time de fechamento esteja sempre preparado.</div>
+        <div class="svc-tag">Entregável Estratégico</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metodo" class="method">
+  <div class="method-inner">
+    <div class="eyebrow">A Metodologia Sell4you</div>
+    <div class="sec-title">O Diferencial das 6 Semanas</div>
+    <p class="sec-sub">Diferente do mercado, não começamos a ligar sem entender o seu negócio. Cada operação é precedida por imersão estratégica real.</p>
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-badge">FASE 1</div>
+          <div class="phase-title">Inteligência<br>& Setup</div>
+        </div>
+        <div class="phase-steps">
+          <div class="phase-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+              <div class="step-name">Onboarding "Raio-X"</div>
+              <div class="step-detail">Questionário profundo para entender o produto, dores do mercado, diferenciais e objeções mais comuns.</div>
+            </div>
+          </div>
+          <div class="phase-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+              <div class="step-name">Estudo de Produto</div>
+              <div class="step-detail">O SDR responsável entra em imersão e aprende a falar a "língua" do seu setor antes de qualquer abordagem.</div>
+            </div>
+          </div>
+          <div class="phase-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+              <div class="step-name">Entrega Estratégica</div>
+              <div class="step-detail">Guia de Objeções e lista de leads prontos antes de qualquer execução.</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase-highlight">
+          <div class="ph-label">Duração</div>
+          <div class="ph-val">6 a 10 Dias Úteis</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-badge">FASE 2</div>
+          <div class="phase-title">Tração &<br>Prospecção</div>
+        </div>
+        <div class="phase-steps">
+          <div class="phase-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+              <div class="step-name">Execução Ativa do Plano</div>
+              <div class="step-detail">Prospecção multicanal com o SDR que estudou o seu produto. Abordagem consultiva, não robótica.</div>
+            </div>
+          </div>
+          <div class="phase-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+              <div class="step-name">Foco em Volume com Qualidade</div>
+              <div class="step-detail">Agendamentos contínuos de SQLs — volume crescente sem abrir mão da qualificação.</div>
+            </div>
+          </div>
+          <div class="phase-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+              <div class="step-name">Modelo Flexível</div>
+              <div class="step-detail">Sem contratos longos e burocráticos. Pagamento atrelado ao início real da operação.</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase-highlight">
+          <div class="ph-label">Duração</div>
+          <div class="ph-val">4 Semanas de Operação</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="porque" class="why">
+  <div class="why-inner">
+    <div class="eyebrow">Por que a Sell4you</div>
+    <div class="sec-title">Três razões que nos diferenciam</div>
+    <p class="sec-sub">Entregamos o nível de serviço das grandes empresas com um ticket acessível para o Middle Market.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <div class="why-title">SDRs Especialistas, Não Robôs</div>
+        <div class="why-desc">O mesmo profissional que estuda o seu produto é o que faz a abordagem. Isso garante uma prospecção consultiva e humanizada, que converte mais.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <div class="why-title">Risco Reduzido desde o Início</div>
+        <div class="why-desc">Modelo de pagamento atrelado ao início real da operação. O planejamento estratégico é entregue antes de qualquer execução.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <div class="why-title">Prospecção para o Middle Market</div>
+        <div class="why-desc">Democratizamos o nível de serviço das grandes operações de vendas. Ticket acessível para PMEs, Startups e Consultorias.</div>
+        <div class="price-highlight"><div class="price-tag">R$ 4.500 – R$ 10.000</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="targets">
+  <div class="targets-inner">
+    <span class="targets-label">Atendemos</span>
+    <div class="targets-list">
+      <div class="target-pill">PMEs</div>
+      <div class="target-pill">Startups</div>
+      <div class="target-pill">Consultorias</div>
+      <div class="target-pill">Setor de Saúde</div>
+      <div class="target-pill">Consórcios</div>
+      <div class="target-pill">B2B em geral</div>
+    </div>
+  </div>
+</div>
+
+<section id="diagnostico" class="cta">
+  <div class="cta-inner">
+    <div class="eyebrow">Próximo Passo</div>
+    <h2>Agende sua Reunião de Diagnóstico</h2>
+    <p>30 minutos para entendermos o seu negócio e apresentarmos como a Sell4you pode construir o seu funil de elite. Sem compromisso.</p>
+    <div class="cta-box">
+      <div class="cta-box-title">Reunião de Diagnóstico Gratuita</div>
+      <div class="cta-box-sub">Preencha o formulário e entraremos em contato em até 1 dia útil.</div>
+      <div class="form-row">
+        <div class="fg"><label>Nome</label><input type="text" placeholder="Seu nome completo"></div>
+        <div class="fg"><label>Empresa</label><input type="text" placeholder="Nome da empresa"></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+        <div class="fg"><label>WhatsApp</label><input type="tel" placeholder="(11) 9 0000-0000"></div>
+      </div>
+      <div class="fg">
+        <label>Segmento da Empresa</label>
+        <select>
+          <option value="">Selecione seu segmento</option>
+          <option>PME / Pequeno e Médio Negócio</option>
+          <option>Startup</option>
+          <option>Consultoria</option>
+          <option>Saúde</option>
+          <option>Consórcio</option>
+          <option>Outro B2B</option>
+        </select>
+      </div>
+      <button class="form-submit" onclick="window.open('https://duscaglia.github.io/sell4you/','_blank')">Quero Agendar Meu Diagnóstico →</button>
+      <div class="form-note">Sem compromisso · Resposta em até 1 dia útil</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-box">4</div>
+          <span class="logo-name" style="color:#fff">Sell4you</span>
+        </div>
+        <p>Infraestrutura comercial completa para empresas que querem crescer com consistência e previsibilidade.</p>
+        <div class="footer-slogan">"Nós construímos o seu funil de elite. Você foca apenas no fechamento."</div>
+      </div>
+      <div class="footer-links">
+        <div class="fl-col">
+          <h4>Serviços</h4>
+          <ul>
+            <li><a href="#servicos">Estruturação de ICP</a></li>
+            <li><a href="#servicos">List Building</a></li>
+            <li><a href="#servicos">Prospecção Multicanal</a></li>
+            <li><a href="#servicos">Qualificação SDR/BDR</a></li>
+            <li><a href="#servicos">Agendamento de Reuniões</a></li>
+          </ul>
+        </div>
+        <div class="fl-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#metodo">O Método</a></li>
+            <li><a href="#porque">Por que nós</a></li>
+            <li><a href="https://duscaglia.github.io/sell4you/" target="_blank">Diagnóstico Gratuito</a></li>
+            <li><a href="#">Política de Privacidade</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Sell4you. Todos os direitos reservados.</span>
+      <span class="footer-copy">contato@sell4you.com.br</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
